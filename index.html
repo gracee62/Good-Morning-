@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANJALI 💖 Special Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#ff4d6d,#ff758c,#a18cd1,#ffb199);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    position:relative;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* CARD */
+.card{
+    width:90%;
+    max-width:900px;
+    padding:60px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(20px);
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+h1{
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+h1 span{
+    color:#fff3a6;
+}
+
+.sub{
+    font-size:18px;
+    margin-top:10px;
+    opacity:0.9;
+}
+
+.date{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:600;
+    color:#fff;
+    background:rgba(255,255,255,0.15);
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:30px;
+}
+
+/* TEXT */
+.text{
+    font-size:20px;
+    margin-top:25px;
+    line-height:1.8;
+}
+
+/* TYPING */
+.typing{
+    margin-top:25px;
+    font-size:24px;
+    font-weight:600;
+}
+
+.cursor{
+    display:inline-block;
+    width:3px;
+    background:white;
+    margin-left:5px;
+    animation:blink 0.7s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+
+/* BUTTONS */
+button{
+    padding:14px 28px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:600;
+    margin:10px;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.btn1{
+    background:white;
+    color:#ff4d6d;
+}
+
+.btn1:hover{
+    transform:scale(1.05);
+}
+
+.btn2{
+    background:#ff4d6d;
+    color:white;
+}
+
+.btn2:hover{
+    transform:scale(1.05);
+}
+
+/* HEARTS */
+.heart{
+    position:absolute;
+    font-size:22px;
+    animation:fly 1s ease-out forwards;
+}
+
+@keyframes fly{
+    0%{transform:translate(0,0); opacity:1;}
+    100%{transform:translate(var(--x),var(--y)); opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Good Morning <span>ANJALI 💖</span></h1>
+
+    <div class="sub">
+        A special message for you ✨
+    </div>
+
+    <div class="date">
+        📅 May 23, 2026 — I hope your day becomes beautiful, peaceful & full of smiles 💕
+    </div>
+
+    <div class="text">
+        Good morning my love 💖<br>
+        You are the reason my world feels beautiful ✨<br>
+        Stay happy, stay smiling, always 💕
+    </div>
+
+    <!-- TYPING -->
+    <div class="typing">
+        <span id="typingText"></span><span class="cursor"></span>
+    </div>
+
+    <div>
+        <button class="btn1" onclick="restartTyping()">Replay 💌</button>
+        <button class="btn2" onclick="heartExplosion(event)">Love Explosion 💖</button>
+    </div>
+
+</div>
+
+<script>
+
+/* TYPING */
+const text = "I love you ANJALI... 💖😘";
+let index = 0;
+
+function typeText(){
+    if(index < text.length){
+        document.getElementById("typingText").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText,100);
+    }
+}
+
+function restartTyping(){
+    document.getElementById("typingText").innerHTML = "";
+    index = 0;
+    typeText();
+}
+
+typeText();
+
+/* HEART EXPLOSION */
+function heartExplosion(e){
+
+    const hearts = ["💖","💗","💘","💝","💕","❤️"];
+
+    for(let i=0;i<30;i++){
+
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+        document.body.appendChild(heart);
+
+        let x = (Math.random()-0.5)*500 + "px";
+        let y = (Math.random()-0.5)*500 + "px";
+
+        heart.style.left = e.clientX + "px";
+        heart.style.top = e.clientY + "px";
+
+        heart.style.setProperty("--x",x);
+        heart.style.setProperty("--y",y);
+
+        setTimeout(()=>heart.remove(),1000);
+    }
+}
+
+</script>
+
+</body>
+</html>
